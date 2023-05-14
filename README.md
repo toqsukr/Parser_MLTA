@@ -1,6 +1,6 @@
 # Parser_MLTA
 
-Software implementation of the parser for the course Mmathematical Logic and Theory of Algorithms ETU.
+Software implementation of the parser for the course Mathematical Logic and Theory of Algorithms ETU.
 
 ## Recommended IDE Setup
 
