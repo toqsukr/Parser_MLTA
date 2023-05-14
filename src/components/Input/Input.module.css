@@ -1,15 +1,25 @@
 #input {
     max-width: 350px;
-    min-width: 170px;
+    min-width: 250px;
     width: 60%;
     border: 1px solid black;
     border-radius: 8px;
     padding: 5px 5px 5px 5px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
 }
 
 #input:focus {
     border: 1px solid black;
     border-radius: 5px;
+}
+
+@media (max-width: 510px) {
+    #input {
+        max-width: 400px;
+        min-width: 300px;
+        border: 1px solid black;
+        border-radius: 8px;
+        padding: 5px 5px 5px 5px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 }

@@ -60,8 +60,12 @@
                 @update-InputData="(data) => (inputData = data)"
                 @delete-Message="() => (answer = '')" />
             <div id="button-container">
-                <button id="button" @click="checkData">Проверить</button>
-                <button id="button" @click="clearInput">Очистить</button>
+                <button id="left" class="button" @click="checkData">
+                    Проверить
+                </button>
+                <button id="right" class="button" @click="clearInput">
+                    Очистить
+                </button>
             </div>
         </div>
 
@@ -108,6 +112,12 @@
         gap: 15px;
     }
 
+    #button-container {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+    }
+
     #title {
         margin: 0 20px 0 20px;
         padding: 5px 0 0 0;
@@ -115,13 +125,7 @@
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
-    #button-container {
-        display: flex;
-        flex-direction: row;
-        gap: 10px;
-    }
-
-    #button {
+    .button {
         background-color: rgba(226, 246, 234, 0.833);
         color: black;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -132,7 +136,7 @@
         transition: all 0.5s;
     }
 
-    #button:hover {
+    .button:hover {
         transition: all 0.3s;
         opacity: 1;
     }
@@ -140,6 +144,40 @@
     #message_container {
         display: flex;
         justify-content: center;
+    }
+
+    @media (max-width: 510px) {
+        #input-container {
+            display: grid;
+            justify-content: center;
+        }
+
+        #button-container {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            grid-gap: 10px;
+        }
+
+        .button {
+            width: 110px;
+            height: 40px;
+            background-color: rgba(226, 246, 234, 0.833);
+            color: black;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 5px 10px 5px 10px;
+            border: 1px solid black;
+            border-radius: 8px;
+            opacity: 0.7;
+            transition: all 0.5s;
+        }
+
+        #left {
+            grid-column-start: 1;
+        }
+
+        #right {
+            grid-column-start: 3;
+        }
     }
 
     .message-appearance-enter-from,

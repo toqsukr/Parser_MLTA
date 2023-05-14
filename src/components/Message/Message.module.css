@@ -25,3 +25,15 @@
     margin: 0 0 0 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+@media (max-width: 510px) {
+    #message_container {
+        width: 75%;
+        max-width: 380px;
+        text-align: center;
+        padding: 10px 15px 10px 15px;
+        border: 1px solid black;
+        border-radius: 8px;
+        color:rgba(32, 32, 32, 0.737)
+    }
+}
