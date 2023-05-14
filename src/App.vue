@@ -1,6 +1,9 @@
 <script setup>
     import Button from './components/Button/Button.vue'
     import Input from './components/Input/Input.vue'
+    import { ref } from 'vue'
+
+    const inputData = ref('')
 </script>
 
 <template>
@@ -31,10 +34,14 @@
             <p1>[{a+b}*(a-b)/(b+c)]*([c+b]*[c])*{a+c} </p1>
         </div>
         <div id="input-container">
-            <Input />
+            <Input
+                :inputData="inputData"
+                @update-InputData="(data) => (inputData = data)" />
             <div id="button-container">
                 <Button name="Проверить" />
-                <Button name="Очистить" />
+                <Button
+                    @update-InputData="(data) => (inputData = data)"
+                    name="Очистить" />
             </div>
         </div>
     </div>
