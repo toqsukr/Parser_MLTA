@@ -1,4 +1,12 @@
-function beginTest(ch) {
+export function beginTest(ch) {
+    const sign = () => {
+        if(ch.length > index && "+-*/".indexOf(ch[index]) === -1)  return "error sign"
+    }
+    
+    const letter = () => {
+        if(ch.length > index && "abcdefghijklmnopqrstuvwxyz".indexOf(ch[index]) === -1)    return "error letter"        
+    }
+
     const CBF = () => {
         if(ch.length > index && "({[".indexOf(ch[index]) != -1){
             msg = BE()
@@ -38,10 +46,9 @@ function beginTest(ch) {
             if(msg)    return msg
         }
         else return "error KBE"
-
+        
     }
 
-    
     const BE = () => {
         if(ch.length > index && '(' === ch[index]) {
             index++
@@ -62,10 +69,9 @@ function beginTest(ch) {
             if(ch.length== index || ']' != ch[index])    return "error BE"
         }
         else    return "error BE"
-
+        
     }
-    
-    
+
     const DBE = () => {
         if(ch.length > index && "({[".indexOf(ch[index]) != -1) {
             msg = BE()
@@ -82,9 +88,9 @@ function beginTest(ch) {
             if(msg)    return msg
         }
         else return "error DBE"
-
+        
     }
-    
+
     const SE = () => {
         if(ch.length > index && "+-*/".indexOf(ch[index]) != -1) {
             msg = sign()
@@ -93,9 +99,9 @@ function beginTest(ch) {
             msg = KBE()
             if(msg)    return msg
         }
-
+        
     }
-    
+
     const LE = () => {
         if(ch.length > index && "+-*/".indexOf(ch[index]) != -1) {
             msg = sign()
@@ -107,29 +113,22 @@ function beginTest(ch) {
             msg = SE()
             if(msg)    return msg
         }
-
+        
     }
-    
+
     const PE = () => {
-        if(ch.length > index && "+-*/".indexOf(ch[index] != -1)) {
+        if(ch.length > index && "+-*/".indexOf(ch[index]) != -1) {
             msg = sign()
             if(msg)    return msg
             index++
             msg = DBE()
             if(msg)    return msg
         }
-
+        
     }
-    
-    const sign = () => {
-        if(ch.length > index && "+-*/".indexOf(ch[index]) === -1)  return "error sign"
-    }
-    
-    const letter = () => {
-        if(ch.length > index && "abcdefghijklmnopqrstuvwxyz".indexOf(ch[index]) === -1)    return "error letter"        
-    }
+    let msg = ''
     let index = 0;
     msg = CBF()
-    if(msg)   return "Введенное выражение не соответствует грамматике!"
+    if(msg || ch.length != index)   return "Введенное выражение не соответствует грамматике!"
     else    return "Введенное выражение соответствует грамматике!"
 }

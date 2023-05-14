@@ -1,9 +1,30 @@
 <script setup>
-    import Button from './components/Button/Button.vue'
     import Input from './components/Input/Input.vue'
+    import Message from './components/Message/Message.vue'
+    import { beginTest } from './util/parser'
     import { ref } from 'vue'
 
     const inputData = ref('')
+    const answer = ref('')
+    const isCorrect = ref(null)
+    const isEmptyInput = ref(null)
+    const checkData = () => {
+        if (inputData.value) {
+            isEmptyInput.value = false
+            answer.value = beginTest(inputData.value)
+            if (answer.value.includes(' не ')) isCorrect.value = false
+            else isCorrect.value = true
+        } else {
+            isEmptyInput.value = true
+            answer.value = 'Введите выражение для проверки!'
+        }
+    }
+
+    const clearInput = () => {
+        inputData.value = ''
+        answer.value = ''
+        isEmptyInput.value = ''
+    }
 </script>
 
 <template>
@@ -36,14 +57,22 @@
         <div id="input-container">
             <Input
                 :inputData="inputData"
-                @update-InputData="(data) => (inputData = data)" />
+                @update-InputData="(data) => (inputData = data)"
+                @delete-Message="() => (answer = '')" />
             <div id="button-container">
-                <Button name="Проверить" />
-                <Button
-                    @update-InputData="(data) => (inputData = data)"
-                    name="Очистить" />
+                <button id="button" @click="checkData">Проверить</button>
+                <button id="button" @click="clearInput">Очистить</button>
             </div>
         </div>
+
+        <Transition name="message-appearance">
+            <div id="message_container" v-if="answer.length">
+                <Message
+                    :text="answer"
+                    :isCorrect="isCorrect"
+                    :isEmptyInput="isEmptyInput" />
+            </div>
+        </Transition>
     </div>
 </template>
 
@@ -59,7 +88,7 @@
         display: flex;
         flex-direction: column;
         text-align: center;
-        gap: 40px;
+        gap: 30px;
         margin: 30px 30px 0 30px;
     }
 
@@ -90,5 +119,43 @@
         display: flex;
         flex-direction: row;
         gap: 10px;
+    }
+
+    #button {
+        background-color: rgba(226, 246, 234, 0.833);
+        color: black;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        padding: 5px 10px 5px 10px;
+        border: 1px solid black;
+        border-radius: 5px;
+        opacity: 0.7;
+        transition: all 0.5s;
+    }
+
+    #button:hover {
+        transition: all 0.3s;
+        opacity: 1;
+    }
+
+    #message_container {
+        display: flex;
+        justify-content: center;
+    }
+
+    .message-appearance-enter-from,
+    .message-appearance-leave-to {
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    .message-appearance-enter-active,
+    .message-appearance-leave-active {
+        transition: all 0.5s;
+    }
+
+    .message-appearance-enter-to,
+    .message-appearance-leave-from {
+        transform: scale(1);
+        opacity: 1;
     }
 </style>
