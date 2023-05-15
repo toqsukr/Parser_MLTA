@@ -91,6 +91,7 @@
         </div>
         <Input
             :inputData="inputData"
+            :isLoading="isLoading"
             @update-InputData="(data) => (inputData = data)"
             @delete-Message="() => (answer = '')" />
         <div id="button-container">
@@ -199,6 +200,23 @@
             align-items: center;
             gap: 30px;
             margin: 30px 30px 0 30px;
+        }
+
+        #button-container {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+        }
+
+        .button {
+            background-color: rgba(226, 246, 234, 0.833);
+            color: black;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 8px 12px 8px 12px;
+            border: 1px solid black;
+            border-radius: 5px;
+            opacity: 0.7;
+            transition: all 0.5s;
         }
     }
 
