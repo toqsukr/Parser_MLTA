@@ -126,7 +126,7 @@ export function beginTest(ch) {
     }
     let msg = ''
     let index = 0;
-    msg = CBF()
+    msg = KBE()
     if(msg || ch.length != index)   return "Введенное выражение не соответствует грамматике!"
     else    return "Введенное выражение соответствует грамматике!"
 }
