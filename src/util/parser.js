@@ -45,8 +45,7 @@ export function beginTest(ch) {
             msg = SE()
             if(msg)    return msg
         }
-        else return "error KBE"
-        
+        else return "error KBE" 
     }
 
     const BE = () => {
