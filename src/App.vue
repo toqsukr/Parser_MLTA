@@ -188,7 +188,7 @@
 
     .message-appearance-enter-active,
     .message-appearance-leave-active {
-        transition: all 0.5s;
+        transition: all 0.7s;
     }
 
     .message-appearance-enter-to,
