@@ -8,6 +8,23 @@
     const answer = ref('')
     const isCorrect = ref(null)
     const isEmptyInput = ref(null)
+    const isLoading = ref(false)
+    const numberCorrectExample = ref(0)
+    const numberWrongExample = ref(0)
+    const correctExamples = [
+        '[a+(b*c)/{([b*d]/[a+b+c])*a}]',
+        '{[a-b-c-d]/[{a*a}*{b*b}]}*d',
+        '[(a-b-c)*(a+b+c+d)]/([{[a+b]*[c-d]}*{d+c-a}]/b)',
+        '([({a*b}-{c/d})*e]/{([e*d]*[a-b-c-d-e])/a})',
+        '{(a+b+c+d+e)/(a-b-c-d-e)}*a*b*c*d*e',
+    ]
+    const wrongExamples = [
+        '[(a)+(b*c)/{([d]/[b+c])*a}]',
+        '([a-b-c-d]/[{a*a}*{b*b}]*[c*d])',
+        '[(a-b-c)*(b+c+d)]/({[a+b]*[c]}*{d+c-a}/b)',
+        '[{a*b}-{c/d}*{e}]/{([e*d]*[a-b-c-d-e])/[a]}*{a*b*e}',
+        '(a+b+c+d+e)/(a-b-c-d-e)*(a*b*c*d*e)',
+    ]
     const checkData = () => {
         if (inputData.value) {
             isEmptyInput.value = false
@@ -19,11 +36,30 @@
             answer.value = 'Введите выражение для проверки!'
         }
     }
-
     const clearInput = () => {
         inputData.value = ''
         answer.value = ''
         isEmptyInput.value = ''
+    }
+
+    const showCorrectExample = () => {
+        isLoading.value = true
+        clearInput()
+        inputData.value = correctExamples[numberCorrectExample.value]
+        numberCorrectExample.value++
+        numberCorrectExample.value %= 5
+        setTimeout(() => (isLoading.value = false), 700)
+        setTimeout(() => checkData(), 400)
+    }
+
+    const showWrongExample = () => {
+        isLoading.value = true
+        clearInput()
+        inputData.value = wrongExamples[numberWrongExample.value]
+        numberWrongExample.value++
+        numberWrongExample.value %= 5
+        setTimeout(() => (isLoading.value = false), 700)
+        setTimeout(() => checkData(), 400)
     }
 </script>
 
@@ -44,7 +80,6 @@
                 В правильной записи не могут присутствовать "лишние" (двойные)
                 скобки, но одна буква не может браться в скобки.</p1
             >
-            <br />
 
             <p1>Пример.</p1>
 
@@ -54,19 +89,29 @@
             <p1>Неправильная запись:</p1>
             <p1>[{a+b}*(a-b)/(b+c)]*([c+b]*[c])*{a+c} </p1>
         </div>
-        <div id="input-container">
-            <Input
-                :inputData="inputData"
-                @update-InputData="(data) => (inputData = data)"
-                @delete-Message="() => (answer = '')" />
-            <div id="button-container">
-                <button id="left" class="button" @click="checkData">
-                    Проверить
-                </button>
-                <button id="right" class="button" @click="clearInput">
-                    Очистить
-                </button>
-            </div>
+        <Input
+            :inputData="inputData"
+            @update-InputData="(data) => (inputData = data)"
+            @delete-Message="() => (answer = '')" />
+        <div id="button-container">
+            <button :disabled="isLoading" class="button" @click="checkData">
+                Проверить
+            </button>
+            <button :disabled="isLoading" class="button" @click="clearInput">
+                Очистить
+            </button>
+            <button
+                :disabled="isLoading"
+                class="button"
+                @click="showCorrectExample">
+                Пример
+            </button>
+            <button
+                :disabled="isLoading"
+                class="button"
+                @click="showWrongExample">
+                Контрпример
+            </button>
         </div>
 
         <Transition name="message-appearance">
@@ -91,7 +136,7 @@
         height: auto;
         display: flex;
         flex-direction: column;
-        text-align: center;
+        align-items: center;
         gap: 30px;
         margin: 30px 30px 0 30px;
     }
@@ -107,7 +152,7 @@
 
     #input-container {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: center;
         gap: 15px;
     }
@@ -115,7 +160,7 @@
     #button-container {
         display: flex;
         flex-direction: row;
-        gap: 10px;
+        gap: 15px;
     }
 
     #title {
@@ -129,7 +174,7 @@
         background-color: rgba(226, 246, 234, 0.833);
         color: black;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        padding: 5px 10px 5px 10px;
+        padding: 10px 15px 10px 15px;
         border: 1px solid black;
         border-radius: 5px;
         opacity: 0.7;
@@ -147,36 +192,13 @@
     }
 
     @media (max-width: 510px) {
-        #input-container {
-            display: grid;
-            justify-content: center;
-        }
-
-        #button-container {
-            display: grid;
-            grid-template-columns: repeat(1, 1fr);
-            grid-gap: 10px;
-        }
-
-        .button {
-            width: 110px;
-            height: 40px;
-            background-color: rgba(226, 246, 234, 0.833);
-            color: black;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding: 5px 10px 5px 10px;
-            border: 1px solid black;
-            border-radius: 8px;
-            opacity: 0.7;
-            transition: all 0.5s;
-        }
-
-        #left {
-            grid-column-start: 1;
-        }
-
-        #right {
-            grid-column-start: 3;
+        #main-container {
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            margin: 30px 30px 0 30px;
         }
     }
 

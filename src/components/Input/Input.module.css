@@ -1,12 +1,14 @@
 #input {
-    max-width: 350px;
+    max-width: 415px;
     min-width: 250px;
-    width: 60%;
+    width: 100%;
     border: 1px solid black;
     border-radius: 8px;
     padding: 5px 5px 5px 5px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: all 0.5s;
 }
+
 
 #input:focus {
     border: 1px solid black;
@@ -15,11 +17,12 @@
 
 @media (max-width: 510px) {
     #input {
-        max-width: 400px;
+        min-height: 26px;
+        max-width: 415px;
         min-width: 300px;
         border: 1px solid black;
         border-radius: 8px;
-        padding: 5px 5px 5px 5px;
+        padding: 2px 4px 2px 4px;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 }

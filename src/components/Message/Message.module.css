@@ -12,11 +12,12 @@
 }
 
 #message_container {
-    width: 70%;
-    max-width:410px;
+    width: 100%;
+    max-width:440px;
     text-align: center;
-    padding: 10px 20px 10px 20px;
     border: 1px solid black;
+    padding: 14px 18px 14px 18px;
+
     border-radius: 8px;
     color:rgba(32, 32, 32, 0.737)
 }
@@ -28,10 +29,11 @@
 
 @media (max-width: 510px) {
     #message_container {
-        width: 75%;
-        max-width: 380px;
+        width: 100%;
+        max-width: 400px;
         text-align: center;
-        padding: 10px 15px 10px 15px;
+        padding: 14px 19px 14px 19px;
+        
         border: 1px solid black;
         border-radius: 8px;
         color:rgba(32, 32, 32, 0.737)
