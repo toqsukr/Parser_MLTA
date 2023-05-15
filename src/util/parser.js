@@ -83,7 +83,7 @@ export function beginTest(ch) {
             msg = letter()
             if(msg)    return msg
             index++
-            msg = SE()
+            msg = PE()
             if(msg)    return msg
         }
         else return "error DBE"
@@ -109,10 +109,9 @@ export function beginTest(ch) {
             msg = letter()
             if(msg)    return msg
             index++
-            msg = SE()
+            msg = LE()
             if(msg)    return msg
         }
-        
     }
 
     const PE = () => {
