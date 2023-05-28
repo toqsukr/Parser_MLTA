@@ -29,7 +29,11 @@
         if (inputData.value) {
             isEmptyInput.value = false
             answer.value = beginTest(inputData.value)
-            if (answer.value.includes(' не ')) isCorrect.value = false
+            if (
+                answer.value.includes(' не ') ||
+                answer.value.includes(' букв ')
+            )
+                isCorrect.value = false
             else isCorrect.value = true
         } else {
             isEmptyInput.value = true

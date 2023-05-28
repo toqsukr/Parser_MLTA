@@ -87,7 +87,6 @@ export function beginTest(ch) {
             if(msg)    return msg
         }
         else return "error DBE"
-        
     }
 
     const SE = () => {
@@ -98,7 +97,6 @@ export function beginTest(ch) {
             msg = KBE()
             if(msg)    return msg
         }
-        
     }
 
     const LE = () => {
@@ -122,11 +120,12 @@ export function beginTest(ch) {
             msg = DBE()
             if(msg)    return msg
         }
-        
     }
     let msg = ''
     let index = 0;
-    msg = KBE()
-    if(msg || ch.length != index)   return "Введенное выражение не соответствует грамматике!"
-    else    return "Введенное выражение соответствует грамматике!"
+    if(ch.match("^([a-z(){}\\[\\]+\\-*/])*")[0] === ch) {
+        msg = KBE()
+        if(msg || ch.length != index)   return "Введенное выражение не соответствует грамматике!"
+        else    return "Введенное выражение соответствует грамматике!"
+    } else  return "Выражение может состоять только из строчных букв латинского алфавита, знаков операций и скобок!"
 }
