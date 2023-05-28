@@ -78,15 +78,13 @@ export function beginTest(ch) {
             index++
             msg = LE()
             if(msg)    return msg
-        }
-        else if(ch.length > index && "abcdefghijklmnopqrstuvwxyz".indexOf(ch[index]) != -1) {
+        } else if(ch.length > index && "abcdefghijklmnopqrstuvwxyz".indexOf(ch[index]) != -1) {
             msg = letter()
             if(msg)    return msg
             index++
             msg = SE()
             if(msg)    return msg
-        }
-        else return "error DBE"
+        } else return "error DBE"
     }
 
     const SE = () => {
@@ -121,8 +119,10 @@ export function beginTest(ch) {
             if(msg)    return msg
         }
     }
+
     let msg = ''
     let index = 0;
+    ch = ch.replace(/ /g, "")
     if(ch.match("^([a-z(){}\\[\\]+\\-*/])*")[0] === ch) {
         msg = KBE()
         if(msg || ch.length != index)   return "Введенное выражение не соответствует грамматике!"
